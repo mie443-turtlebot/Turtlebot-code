@@ -3,18 +3,27 @@
 	
 int DriveStraight(speed, distance)
 {
+	#initialize x y and yaw position from odom
 	x = posX;
 	y = posY;
 	theta = yaw;
+	#variable stop -- 1 to move
 	int stop = 1;
+	#tolerance
 	double tol = 0.1;
 	
+	#define x and y goal location
 	xgoal = x + distance * cos(theta);
 	ygoal = y + distance * sin(theta);
 	
-	startx = x; starty = y; localx = 0; localy = 0;
-	xdistance = distance * cos(theta);
-	ydistance = distance * sin(theta);
+	#define starting position from x and y
+	startx = x; starty = y; 
+	
+	#define current x y location 
+	localx = 0; localy = 0;
+	
+	#xdistance = distance * cos(theta);
+	#ydistance = distance * sin(theta);
 	
 	while((x < xgoal - tol or x > xGoal + tol) or (y < yGoal - tol or y > yGoal + tol) or (stop == 1))
 	{
@@ -25,8 +34,7 @@ int DriveStraight(speed, distance)
 	}
 	ROS_INFO("The robot drove straight");
 	publishTwist(0, 0);
-}		
-
+}				
 	
 int Rotate(angleToRotate)
 {
